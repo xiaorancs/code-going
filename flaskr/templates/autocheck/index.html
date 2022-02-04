@@ -1,0 +1,232 @@
+<script type="text/javascript" src="/static/js/jquery-3.6.0.min.js"></script>
+<style>
+#myInput {
+    background-image: url('https://static.runoob.com/images/mix/searchicon.png'); /* 搜索按钮 */
+    background-position: 10px 12px; /* 定位搜索按钮 */
+    background-repeat: no-repeat; /* 不重复图片*/
+    width: 100%; 
+    font-size: 16px; /* 加大字体 */
+    padding: 12px 20px 12px 40px; 
+    border: 1px solid #ddd; 
+    margin-bottom: 12px; 
+}
+
+#myUL {
+    /* 移除默认的列表样式 */
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#myUL li a {
+    border: 1px solid #ddd; /* 链接添加边框 */
+    margin-top: -1px; 
+    background-color: #f6f6f6; 
+    padding: 12px; 
+    text-decoration: none;
+    font-size: 18px; 
+    color: black; 
+    display: block; 
+}
+
+#myUL li a.header {
+    background-color: #e2e2e2; 
+    cursor: default; 
+}
+
+#myUL li a:hover:not(.header) {
+    background-color: #eee;
+}
+
+body{  
+background:url(/static/dw2.png);  
+/* filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')";  
+-moz-background-size:100% 100%;  
+    background-size:100% 100%;   */
+}
+
+#login-box{
+    width: 50%;
+    height: auto;
+    margin: 0 auto;
+    margin-top: 15%;
+    text-align: center;
+    background: #00000000;
+    padding: 20px 50px;
+    overflow: auto; 
+}
+
+.label_style0{
+    margin-top: 15px;
+    width: 100px;
+    height: 30px;
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+    background:linear-gradient(to right,#09a9f3 0%,#4013e6e1 100%);
+    border: 0;
+    border-radius: 15px;
+    vertical-align:middle;
+}
+
+.label_style1{
+    margin-top: 15px;
+    width: 100px;
+    height: 30px;
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+    background:linear-gradient(to right,#426134 0%,#544781e1 100%);
+    border: 0;
+    border-radius: 15px;
+    vertical-align:middle;
+}
+
+input {font-size:14px;font-family:arial;border: none;background:none;}
+    /*--这里设置输入框文字字体，并设置输入框背景和边框为无--*/
+span.search {float:left;
+    /*--将输入框放在span中并设置浮动--*/
+padding:0;margin:0;
+width:550px;height:36px;
+    /*--设置输入框的外层元素宽度和高度--*/
+background:#fafafa;color: #9e9c9c;
+    /*--设置背景颜色和输入框文字颜色--*/
+border: 2px solid #628DFF;
+border-top-left-radius:5px;
+border-bottom-left-radius:5px;
+margin-left: 105px;
+    /*--设置边框，并将左上角和左下角设置圆角--*/
+}
+span.search input {
+width: 440px;height:36px;
+    /*--设置输入框本身的宽度和高度--*/
+line-height:36px;
+    /*--设置输入框行距和高度相等以便垂直居中--*/
+padding:0 5px;
+    /*--设置输入框本身离外层的内边距，输入文字更美观--*/
+outline:none;
+    /*--为了美观，将获取焦点时的轮廓线去掉--*/
+}
+span.button {float:left;
+    /*--设置提交按钮放在span中并设置浮动--*/
+padding:0;margin:0;
+border: 2px solid #628DFF;
+border-top-right-radius:5px;
+border-bottom-right-radius:5px;
+    /*--设置边框，并将右上角和右下角设置圆角--*/
+}
+
+span.button input {
+height:36px;
+line-height:36px;
+    /*--设置按钮本身的高度，行距和高度相等以便垂直居中--*/
+padding:0 12px;
+    /*--为了美观，适当设置按钮文字的左右边距--*/
+background:#628DFF;color:#fff;
+    /*--将提交按钮的背景颜色设置与边框颜色相同--*/
+}
+::-webkit-input-placeholder {color:#ccc;}
+    /*--设置输入框内默认文字的颜色--*/
+
+span.button2 {float:left;
+    /*--设置提交按钮放在span中并设置浮动--*/
+padding:0;margin:0;
+border: 2px solid #628DFF;
+border-top-left-radius:5px;
+border-bottom-left-radius:5px;
+    /*--设置边框，并将右上角和右下角设置圆角--*/
+}
+
+span.button2 input {
+height:36px;
+line-height:36px;
+    /*--设置按钮本身的高度，行距和高度相等以便垂直居中--*/
+padding:0 12px;
+    /*--为了美观，适当设置按钮文字的左右边距--*/
+background:#628DFF;color:#fff;
+    /*--将提交按钮的背景颜色设置与边框颜色相同--*/
+}
+
+
+
+</style>
+
+<body>
+<div id="login-box">
+<h1>WhaleSearch</h1>
+
+<span class="search"><input id="myInput" type="text" name="word" placeholder="请输入..."/></span>
+<span class="button"><input type="submit" id="WhaleGo" value="WhaleGo" onclick="myFunction()" /></span>
+
+<br><br><br><br><br><br>
+
+<span class="button2" id='show_span_1' style="display:none"><input type="submit" id="WhaleGoShow" value="你是不是想搜：" /></span>
+<b><span class="search" id='show_span_2' style="display:none"></span></b>
+<!-- <input id="show_text" type="text" name="word"/> -->
+</div>
+
+</body>
+
+<script>
+function myFunction() {
+    // 声明变量
+    var input, filter, ul, li, a, i, result;
+    input = document.getElementById('myInput');
+    query = input.value.toLowerCase();
+
+    // 隐藏
+    // document.getElementById("show_span_1").style.display = 'none';
+    // document.getElementById("show_span_2").style.display = 'none';
+
+    show_txt = document.getElementById("show_span_2");
+    show_txt.innerHTML = "";
+
+    const Url = "/autocheck_do";
+    var ans = $.get({
+        url:Url,
+        type:'GET',
+        dataType: "json",
+        data: {"query":query},
+        success:function(response){
+            result = response.response.result
+            if (result.hasOwnProperty('exception')) {
+                alert(result['exception']);
+                window.location.href = ".";
+            }
+
+            console.log(result);
+            hint_query = result['answer'];
+            
+            query_split = query.split(" ");
+            hint_query_split = hint_query.split(" ");
+
+            hint_query_txt = "";
+            for (i = 0; i < query_split.length; i++) {
+                if (query_split[i] != hint_query_split[i]) {
+                    if (i == 0) {
+                        hint_query_txt += "<font color='red'>" + hint_query_split[i] + "</font>";
+                    } else {
+                        hint_query_txt += " <font color='red'>" + hint_query_split[i] + "</font>";
+                    }
+                } else {
+                    if (i == 0) {
+                        hint_query_txt += hint_query_split[i];
+                    } else {
+                        hint_query_txt += " " + hint_query_split[i];
+                    }
+                }
+            }
+
+            show_txt.innerHTML = hint_query_txt;
+            document.getElementById("show_span_1").style.display = '';
+            document.getElementById("show_span_2").style.display = '';
+        },
+        error:function(error){
+            alert("请检查下是否上传autocheck.py文件");
+            window.location.href = ".";
+            // alert("Error！");
+            console.log('Error！');
+        }
+    });
+}
+</script>

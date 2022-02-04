@@ -1,0 +1,238 @@
+<script type="text/javascript" src="/static/js/jquery-3.6.0.min.js"></script>
+<style>
+/* Basic Reset */
+* {
+	border: none;
+	font-family: 'Open Sans', sans-serif;
+	margin: 0;
+	padding: 0;
+}
+body {
+
+}
+.center {
+	background-color: #fff;
+	border-radius: 50%;
+	height: 1200px;
+	margin: auto;
+	width: 1200px;
+}
+h1 {
+	color: #495678;
+	font-size: 30px;	
+	margin-top: 20px;
+	padding-top: 50px;
+	display: block;
+	text-align: center;
+	text-decoration: none;
+}
+a {
+	color: #495678;
+	font-size: 30px;	
+	display: block;
+	text-align: center;
+	text-decoration: none;
+	padding-top: 20px;
+}
+form {
+	background-color: #495678;
+	box-shadow: 4px 4px #3d4a65;
+	margin: 40px auto;
+	padding: 40px 0 30px 40px;	
+	width: 650px;
+}
+.btn {
+	outline: none;
+	cursor: pointer;
+	font-size: 15px;
+	height: 60px;
+	margin: 5px 0 5px 10px;
+	width: 60px;
+}
+.btn:first-child {
+	margin: 5px 0 5px 10px;
+}
+.btn, #display, form {
+	border-radius: 35px;
+}
+#display {
+	outline: none;
+	background-color: #98d1dc;
+	box-shadow: inset 6px 6px 0px #3facc0;
+	color: #dededc;
+	font-size: 20px;
+	height: 50px;
+	text-align: right;
+	width: 400px;
+	padding-right: 10px;
+	margin-left: 10px;
+}
+.number {
+	background-color: #72778b;
+	box-shadow: 0 5px #5f6680;
+	color: #dededc;
+}
+.number:active {
+	box-shadow: 0 2px #5f6680;
+  	-webkit-transform: translateY(2px);
+  	-ms-transform: translateY(2px);
+  	-moz-tranform: translateY(2px);
+  	transform: translateY(2px);
+}
+.operator {
+	background-color: #dededc;
+	box-shadow: 0 5px #bebebe;
+	color: #72778b;
+}
+.operator:active {
+	box-shadow: 0 2px #bebebe;
+  	-webkit-transform: translateY(2px);
+  	-ms-transform: translateY(2px);
+  	-moz-tranform: translateY(2px);
+  	transform: translateY(2px);
+}
+.other {
+	background-color: #e3844c;
+	box-shadow: 0 5px #e76a3d;
+	color: #dededc;
+}
+.other:active {
+	box-shadow: 0 2px #e76a3d;
+  	-webkit-transform: translateY(2px);
+  	-ms-transform: translateY(2px);
+  	-moz-tranform: translateY(2px);
+  	transform: translateY(2px);
+}
+
+body{  
+background:url(/static/dw2.png);  
+filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')";  
+-moz-background-size:100% 100%;  
+    background-size:100% 100%;  
+}
+
+#login-box{
+    width: 60%;
+    height: auto;
+    margin: 0 auto;
+    margin-top: 5%;
+    text-align: center;
+    background: #00000000;
+    padding: 20px 50px;
+    overflow: auto; 
+}
+
+</style>
+
+<body>
+    
+<!-- https://c.runoob.com/codedemo/3124/ -->
+<div id="login-box">
+    <h1>科学计算器</h1>
+    <form name="calculator">
+        <input type="text" id="display">
+        <br>
+        <input type="button" class="btn operator" name="^(-1)" value="1/x" onclick="get(this.name);">
+        <input type="button" class="btn operator" name="^(2)" value="x^2" onclick="get(this.name);">
+        <input type="button" class="btn operator" name="^(3)" value="x^3" onclick="get(this.name);">
+        <input type="button" class="btn operator" name="^(" value="x^y" onclick="get(this.name);">
+
+        <input type="button" class="btn number" value="7" onclick="get(this.value);">
+        <input type="button" class="btn number" value="8" onclick="get(this.value);">
+        <input type="button" class="btn number" value="9" onclick="get(this.value);">
+        <input type="button" class="btn operator" value="+" onclick="get(this.value);">
+        <br>
+        <input type="button" class="btn operator" name="!" value="x!" onclick="get(this.name);">
+        <input type="button" class="btn operator" name='sqrt' value="&radic;" onclick="get(this.value);">	
+        <input type="button" class="btn operator" name="^(1/" value="y&radic;x" onclick="get(this.name);">
+        <input type="button" class="btn number" value="e" onclick="get(this.value);">
+
+        <input type="button" class="btn number" value="4" onclick="get(this.value);">
+        <input type="button" class="btn number" value="5" onclick="get(this.value);">
+        <input type="button" class="btn number" value="6" onclick="get(this.value);">
+        <input type="button" class="btn operator" value="*" onclick="get(this.value);">
+        <br>
+        <input type="button" class="btn operator" name="ln(" value="ln" onclick="get(this.name);">
+        <input type="button" class="btn operator" name='log(' value="log" onclick="get(this.name);">	
+        <input type="button" class="btn operator" name="sin(" value="sin" onclick="get(this.name);">
+        <input type="button" class="btn operator" name="cos(" value="cos" onclick="get(this.name);">
+
+        <input type="button" class="btn number" value="1" onclick="get(this.value);">
+        <input type="button" class="btn number" value="2" onclick="get(this.value);">
+        <input type="button" class="btn number" value="3" onclick="get(this.value);">
+        <input type="button" class="btn operator" value="-" onclick="get(this.value);">
+
+        <br>
+        <input type="button" class="btn operator" name="tan(" value="tan" onclick="get(this.name);">
+        <input type="button" class="btn operator" name='arcsin(' value="arcsin" onclick="get(this.name);">	
+        <input type="button" class="btn operator" name="arccos(" value="arccos" onclick="get(this.name);">
+        <input type="button" class="btn operator" name="arctan(" value="arctan" onclick="get(this.name);">
+
+        <input type="button" class="btn number" value="0" onclick="get(this.value);">
+        <input type="button" class="btn operator" value="." onclick="get(this.value);">
+        <input type="button" class="btn operator" value="/" onclick="get(this.value);">	
+        <input type="button" class="btn other" value="back" onclick="del(this.value);">
+
+        <br>
+        <!-- <input type="button" class="btn operator" value="" onclick="get(this.value)">
+        <input type="button" class="btn operator" value="" onclick="get(this.value)">
+        <input type="button" class="btn operator" value="" onclick="get(this.value)">
+        <input type="button" class="btn operator" value="" onclick="get(this.value)"> -->
+        
+        <input type="button" class="btn operator" value="(" onclick="get(this.value);">
+        <input type="button" class="btn operator" value=")" onclick="get(this.value);">
+        <input type="button" id="clear" class="btn other" value="C">
+        <input type="button" class="btn other" value="=" onclick="calculates();">
+    </form>
+</div>
+</body>
+
+<script>
+    /* limpa o display */ 
+    document.getElementById("clear").addEventListener("click", function() {
+        document.getElementById("display").value = "";
+    });
+    /* recebe os valores */
+    function get(value) {
+        document.getElementById("display").value += value; 
+    } 
+    /* recebe os valores */
+    function del() {
+        var value = document.getElementById("display").value;
+        value = value.substr(0, value.length - 1);
+        document.getElementById("display").value = value; 
+    } 
+
+    /* calcula */
+    function calculates() {
+        var result = 0;
+        result = document.getElementById("display").value;
+        alert("input: " + result);
+        document.getElementById("display").value = "";
+        // document.getElementById("display").value = eval(result);
+
+        const Url = "/calculator_adv_do";
+        var ans = $.get({
+            url:Url,
+            type:'GET',
+            dataType: "json",
+            data: {"input":result},
+            success:function(response){
+                result = response.response.result
+				if (result.hasOwnProperty('exception')) {
+					alert(result['exception']);
+					window.location.href = ".";
+				}
+                ans = result['ans'];
+                // alert(ans);
+                document.getElementById("display").value = ans;
+                console.log(result);
+            },
+            error:function(error){
+                alert("Error！");
+                console.log('Error！');
+            }
+        });
+
+    };
+</script>

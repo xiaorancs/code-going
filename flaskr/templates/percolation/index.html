@@ -1,0 +1,317 @@
+<script type="text/javascript" src="/static/js/jquery-3.6.0.min.js"></script>
+<style>
+/* Basic Reset */
+* {
+	border: none;
+	font-family: 'Open Sans', sans-serif;
+	margin: 0;
+	padding: 0;
+}
+
+.center {
+	background-color: #fff;
+	border-radius: 50%;
+	height: 1200px;
+	margin: auto;
+	width: 1200px;
+}
+h1 {
+	color: #495678;
+	font-size: 30px;	
+	margin-top: 20px;
+	padding-top: 50px;
+	display: block;
+	text-align: center;
+	text-decoration: none;
+}
+a {
+	color: #495678;
+	font-size: 30px;	
+	display: block;
+	text-align: center;
+	text-decoration: none;
+	padding-top: 20px;
+}
+form {
+	background-color: #495678;
+	box-shadow: 4px 4px #3d4a65;
+	margin: 40px auto;
+	padding: 40px 0 30px 40px;	
+	width: 450;
+}
+.btn {
+	outline: none;
+	cursor: pointer;
+	font-size: 20px;
+	height: 30px;
+	margin: 5px 5px 5px 5px;
+	width: 30px;
+}
+
+.btn:first-child {
+	margin: 5px 5px 5px 5px;
+}
+.btn, #display, #display_t, #display_n, form {
+	border-radius: 35px;
+}
+#display, #display_t, #display_n {
+	outline: none;
+	background-color: #98d1dc;
+	box-shadow: inset 6px 6px 0px #3facc0;
+	color: #dededc;
+	font-size: 20px;
+	height: 50px;
+	text-align: right;
+	width: 400px;
+	padding-right: 10px;
+	margin-left: 10px;
+}
+.number {
+	background-color: #242121;
+	box-shadow: 0 1px #444447;
+	color: #99b2c2;
+}
+
+.number0 {
+	background-color: #242121;
+	box-shadow: 0 1px #444447;
+	color: #99b2c2;
+}
+
+.number1 {
+	background-color: #2d7680;
+	box-shadow: 0 1px #444447;
+	color: #99b2c2;
+}
+
+.number2 {
+	background-color: #30427c;
+	box-shadow: 0 1px #444447;
+	color: #99b2c2;
+}
+
+
+
+.number:active {
+	box-shadow: 0 2px #5f6680;
+  	-webkit-transform: translateY(2px);
+  	-ms-transform: translateY(2px);
+  	-moz-tranform: translateY(2px);
+  	transform: translateY(2px);
+}
+.operator {
+	background-color: #dededc;
+	box-shadow: 0 5px #bebebe;
+	color: #72778b;
+}
+.operator:active {
+	box-shadow: 0 2px #bebebe;
+  	-webkit-transform: translateY(2px);
+  	-ms-transform: translateY(2px);
+  	-moz-tranform: translateY(2px);
+  	transform: translateY(2px);
+}
+.other {
+	background-color: #e3844c;
+	box-shadow: 0 5px #e76a3d;
+	color: #dededc;
+}
+.other:active {
+	box-shadow: 0 2px #e76a3d;
+  	-webkit-transform: translateY(2px);
+  	-ms-transform: translateY(2px);
+  	-moz-tranform: translateY(2px);
+  	transform: translateY(2px);
+}
+
+body{  
+background:url(/static/dw2.png);  
+filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')";  
+-moz-background-size:100% 100%;  
+    background-size:100% 100%;  
+}
+
+#login-box{
+    width: 50%;
+    height: auto;
+    margin: 0 auto;
+    margin-top: 5%;
+    text-align: center;
+    background: #06060a00;
+    padding: 20px 50px;
+    overflow: auto; 
+}
+#login-box h1{
+    color: #fff;
+}
+#login-box .form .item input{
+    margin-top: 0px;
+	color: rgba(12, 11, 11, 0.966);
+}
+#login-box .form i{
+    font-size: 18px;
+    color: rgba(12, 11, 11, 0.966);
+}
+
+#login-box button{
+    margin-top: 15px;
+    width: 100px;
+    height: 30px;
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+    background:linear-gradient(to right,#f30909 0%,#4013e6e1 100%);
+    border: 0;
+    border-radius: 15px;
+}
+
+.button{
+    margin-top: 15px;
+    width: 100px;
+    height: 30px;
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+    background:linear-gradient(to right,#f30909 0%,#4013e6e1 100%);
+    border: 0;
+    border-radius: 15px;
+}
+
+
+#display {
+	text-align: left;
+}
+
+#display_t {
+	text-align: left;
+}
+
+#display_n {
+	text-align: left;
+}
+
+.label_style{
+    margin-top: 15px;
+    width: 100px;
+    height: 30px;
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+    background:linear-gradient(to right, 0%,#4013e6e1 100%);
+    border: 0;
+    border-radius: 15px;
+    vertical-align:middle;
+}
+
+</style>
+
+
+<!-- https://c.runoob.com/codedemo/3124/ -->
+<body>
+
+<div id="login-box">
+    <h1>percolation</h1>
+
+	<div class="form">
+        <div class="item">
+            <button>N:</button> <input type="text" id="display_n" id='n' name='n'>
+        </div>
+        <div class="item">
+            <button>T:</button> <input type="text" id="display_t" id='t' name='t'>
+        </div>
+    </div>
+    <input class="button" type="submit" id='submit' value="Submit" onclick="percolate_do()">
+
+	<br>
+	<br>
+	<div class="form">
+        <div class="item">
+			<table id="percolation_show_table" border="1" height="20" vertical-align='middle'></table>
+
+			<br><br>
+			<label class='button'>随机可视化一个渗透的系统</label>
+			<br><br>
+
+			<table id="percolation_table" border="1" height="20" vertical-align='middle'></table>
+		</div>
+	</div>
+</div>
+</body>
+
+<script>
+
+    /* puzzle */
+    function percolate_do() {
+        var n, t, table_html;
+        n = document.getElementById("display_n").value;
+        t = document.getElementById("display_t").value;
+		
+		if (n == "" || t == "") {
+			alert("N和T必须输入整数，N表示系统大小，T表示迭代次数!!!");
+		}
+
+		table_show = document.getElementById("percolation_show_table");
+	    table_show.innerHTML = "";
+
+		table_puzzle = document.getElementById("percolation_table");
+	    table_puzzle.innerHTML = "";
+
+        const Url = "/percolate_do";
+        var ans = $.get({
+            url:Url,
+            type:'GET',
+            dataType: "json",
+            data: {"n":n, 't':t},
+            success:function(response){
+                result = response.response.result;
+				if (result.hasOwnProperty('exception')) {
+					alert(result['exception']);
+					window.location.href = ".";
+				}
+                answer = result['answer'];
+				data = result['data'];
+                // alert(answer);
+				console.log(answer);
+				// _ = answer[0][0];
+				// _ = answer[0][1];
+				var mean = answer[2];
+				var std = answer[3];
+				var low_conf = answer[4];
+				var high_conf = answer[5];
+				table_html = "";
+				table_html += "<tr><td> <label class='label_style'>Percolation维度: </label></td><td>&nbsp;&nbsp;</td><td> <label class='label_style'>" + n + "</label></td></tr>"
+				table_html += "<tr><td> <label class='label_style'>迭代的次数: </label></td><td>&nbsp;&nbsp;</td><td> <label class='label_style'>" + t + "</label></td></tr>"
+				table_html += "<tr><td> <label class='label_style'>Percalate的阈值: </label></td><td>&nbsp;&nbsp;</td><td> <label class='label_style'>" + mean + "</label></td></tr>"
+				table_html += "<tr><td> <label class='label_style'>Percalate的方差: </label></td><td>&nbsp;&nbsp;</td><td> <label class='label_style'>" + std + "</label></td></tr>"
+				table_html += "<tr><td> <label class='label_style'>Percalate的阈值的置信下界: </label></td><td>&nbsp;&nbsp;</td><td> <label class='label_style'>" + low_conf + "</label></td></tr>"
+				table_html += "<tr><td> <label class='label_style'>Percalate的阈值的置信上界: </label></td><td>&nbsp;&nbsp;</td><td> <label class='label_style'>" + high_conf + "</label></td></tr>"
+				table_show.innerHTML = table_html;
+				
+				
+				table_html = "";
+				for (j = 0; j < data.length; j++) {
+					table_html += "<tr>"
+					tr_content = "";
+					for (k = 0; k < data[j].length; k++) {
+						if (data[j][k] == 1) {
+							tr_content += '<td bgcolor="#FFFFFF" class=".squares"> <input type="button" class="btn number1" value="' + data[j][k] + '" ></td>';
+						} else if (data[j][k] > 1) {
+							tr_content += '<td bgcolor="#7FFFD4" class=".squares"> <input type="button" class="btn number2" value="' + data[j][k] + '" ></td>';
+						} else {
+							tr_content += '<td bgcolor="#000000" class=".squares"> <input type="button" class="btn number0" value="' + data[j][k] + '" ></td>';							
+						}
+					}
+					table_html += tr_content + "</tr>";
+				}
+				table_puzzle.innerHTML = table_html;
+            },
+            error:function(error){
+                alert("请检查下是否上传percolation.py文件");
+				// console.log(error);
+				window.location.href = ".";
+                console.log('Error！');
+            }
+        });
+    };
+
+</script>

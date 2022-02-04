@@ -1,0 +1,184 @@
+<style>
+
+body{  
+background:url(/static/dw2.png);  
+filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')";  
+-moz-background-size:100% 100%;  
+    background-size:100% 100%;  
+}
+
+/* body{
+    background: url('/static/dw.png');
+    background-repeat: no-repeat;
+    background-size: 100% auto;
+} */
+#login-box{
+    width: 80%;
+    height: auto;
+    margin: 0 auto;
+    margin-top: 15%;
+    text-align: center;
+    background: #00000060;
+    padding: 20px 50px;
+    overflow: auto; 
+}
+#login-box h1{
+    color: #fff;
+}
+#login-box .form .item input{
+    margin-top: 15px;
+}
+#login-box .form i{
+    font-size: 18px;
+    color: #fff;
+}
+/* #login-box .form .item input {
+    width: 280px;
+    font-size: 20px;
+    border: 0;
+    border-bottom: 2px solid#fff;
+    padding: 5px 10px;
+    background:#ffffff00;
+    color: #fff;
+} */
+#login-box button{
+    margin-top: 15px;
+    width: 100px;
+    height: 30px;
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+    background:linear-gradient(to right,#f30909 0%,#4013e6e1 100%);
+    border: 0;
+    border-radius: 15px;
+}
+
+.label_style{
+    margin-top: 15px;
+    width: 100px;
+    height: 30px;
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+    background:linear-gradient(to right,#f30909 0%,#4013e6e1 100%);
+    border: 0;
+    border-radius: 15px;
+    vertical-align:middle;
+}
+
+#display {
+	outline: 1;
+	background-color: #141718;
+	/* box-shadow: inset 6px 6px 0px #3facc0; */
+    border: 3px solid #99D3F5;
+	color: #dededc;
+	font-size: 20px;
+	height: 50px;
+	text-align: left;
+	width: 400px;
+	padding-right: 0px;
+	margin-left: 10px;
+}
+
+.display {
+	outline: 1;
+	background-color: #141718;
+	/* box-shadow: inset 6px 6px 0px #3facc0; */
+    border: 3px solid #99D3F5;
+	color: #dededc;
+	font-size: 20px;
+	height: 50px;
+	text-align: left;
+	width: 400px;
+	padding-right: 0px;
+	margin-left: 10px;
+}
+
+
+.file {
+    position: relative;
+    display: inline-block;
+    background: #232525;
+    border: 3px solid #99D3F5;
+    border-radius: 4px;
+    padding: 4px 12px;
+    overflow: hidden;
+    color: #1E88C7;
+    text-decoration: none;
+    text-indent: 0;
+    line-height: 40px;
+    width: 400px;
+}
+.file input {
+    position: absolute;
+    font-size: 150px;
+    right: 0;
+    top: 0;
+    opacity: 0;
+}
+.file:hover {
+    background: #AADFFD;
+    border-color: #78C3F3;
+    color: #004974;
+    text-decoration: none;
+}
+
+* { 
+  margin: 0; 
+  padding: 0; 
+}  
+        
+ div { 
+  width: 900px; 
+  margin: 0 auto; 
+  overflow: auto; 
+} 
+        
+ ul { 
+  list-style-type: none; 
+} 
+        
+ li img { 
+  float: left; 
+  margin: 10px; 
+  border: 5px solid #fff; 
+        
+   -webkit-transition: box-shadow 0.5s ease; 
+  -moz-transition: box-shadow 0.5s ease; 
+  -o-transition: box-shadow 0.5s ease; 
+  -ms-transition: box-shadow 0.5s ease; 
+  transition: box-shadow 0.5s ease; 
+  height:150px;
+  width:150px;
+} 
+        
+ li img:hover { 
+  -webkit-box-shadow: 0px 0px 7px rgba(255,255,255,0.9); 
+  box-shadow: 0px 0px 7px rgba(255,255,255,0.9); 
+} 
+
+
+</style>
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<!-- <link rel="stylesheet" href="login.css"> -->
+<!-- font-awesome 图标字体 http://www.fontawesome.com.cn/faicons/#web-application -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" media="screen" rel="stylesheet" type="text/css">
+<title>Demo</title>
+</head>
+<body>
+    <div id="login-box">
+        <h1>你必须填写name和上传对应的文件:{{ data }}.</h1>
+        <h1>name: 建议英文字符，不能是xiaoran.</h1>
+        <h1>你提交的文件结尾必须是: ".py".</h1>
+        <h1>name=xiaoran时，不能提交["percolation.py", "puzzle.py", "calculator.py", "adv_calculator.py"]</h1>
+    </div>
+    <div>
+        <br><br>
+        <a href="."><label class='label_style'>点击这里回到首页!!!</label></a>
+        <br><br>
+    </div>
+</body>
+</html>

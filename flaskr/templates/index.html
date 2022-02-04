@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+<form action="/upload" enctype="multipart/form-data" method="post">
+    name: <input id="name" name="name" type="text"\>
+    <br>
+    <input id="file" name="file" class="file" type="file" multiple data-min-file-count="1">
+    <br>
+    <button type="submit" id='submit' class="btn btn-primary">submit</button>
+</form>
+
+
+<br><br>
+<a href="percolate" target="percolate" rel="percolate">percolate</a>
+
+
+<br><br>
+<a href="puzzle" target="puzzle" rel="puzzle">puzzle</a>
+
+<br><br>
+<a href="worknet" target="worknet" rel="worknet">worknet</a>
+
+<br><br>
+<a href="autocomplete" target="autocomplete" rel="autocomplete">autocomplete</a>
+
+<br><br>
+<a href="kdtree" target="kdtree" rel="kdtree">kdtree</a>
+
+<script>
+    function fileSubmit() {
+        // 声明变量
+        var fileInput = document.getElementById('file_id');
+        var name = document.getElementById("name").value;
+        var file = fileInput.files[0];
+        var formFile = new FormData();
+        formFile.append('file', file);
+        formFile.append('name', name);
+        alert("name:"+name);
+        alert("file:"+file.name);
+        const Url = "/worknet_outcast";
+        var ans = $.post({
+            url:Url,
+            dataType: "json",
+            data: {},
+            success:function(response){
+                alert("success");
+            },
+            error:function(error){
+                alert("Error！");
+                console.log('Error！');
+            }
+        });
+    }
+</script>

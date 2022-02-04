@@ -1,0 +1,172 @@
+
+<script type="text/javascript" src="/static/js/jquery-3.6.0.min.js"></script>
+<style>
+#myInput {
+    background-image: url('https://static.runoob.com/images/mix/searchicon.png'); /* 搜索按钮 */
+    background-position: 10px 12px; /* 定位搜索按钮 */
+    background-repeat: no-repeat; /* 不重复图片*/
+    width: 100%; 
+    font-size: 16px; /* 加大字体 */
+    padding: 12px 20px 12px 40px; 
+    border: 1px solid #ddd; 
+    margin-bottom: 12px; 
+}
+
+#myUL {
+    /* 移除默认的列表样式 */
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#myUL li a {
+    border: 1px solid #ddd; /* 链接添加边框 */
+    margin-top: -1px; 
+    background-color: #f6f6f6; 
+    padding: 12px; 
+    text-decoration: none;
+    font-size: 18px; 
+    color: black; 
+    display: block; 
+}
+
+#myUL li a.header {
+    background-color: #e2e2e2; 
+    cursor: default; 
+}
+
+#myUL li a:hover:not(.header) {
+    background-color: #eee;
+}
+</style>
+
+
+x: <input type="text" id="x"  placeholder="x=">
+<br><br>
+y: <input type="text" id="y"  placeholder="y=">
+<br><br>
+<input type="button" id="click" value="查询" onclick="myClick()">
+
+<br>
+
+<table>
+    <tr>  
+        <td>
+            <ul id="Query">
+                <li><a href="#" class="header">最新距离</a></li>
+            </ul>
+            
+        </td>
+        <td>
+            <ul id="Weight">
+                <li><a href="#" class="header">最近邻</a></li>
+            </ul>
+        </td>
+    </tr>
+</table>
+
+
+<br>
+<br>
+<br>
+xmin: <input type="text" id="xmin"  placeholder="xmin="> &nbsp;&nbsp;&nbsp; ymin: <input type="text" id="ymin"  placeholder="ymin=">
+<br><br>
+xmax: <input type="text" id="xmax"  placeholder="xmax="> &nbsp;&nbsp;&nbsp; ymax: <input type="text" id="ymax"  placeholder="ymax=">
+<br><br>
+<input type="button" id="click" value="查询" onclick="myRange()">
+
+<br>
+<br>
+<img id="ImgId" src="/static/kdtree/cat.jpeg" alt="矩形搜索结果">
+
+<script>
+    function myClick() {
+        // 声明变量
+        var input, filter, ul, li, a, i, result;
+        x = document.getElementById('x').value;
+        y = document.getElementById('y').value;
+        // query = input.value.toLowerCase();
+        query_ul = document.getElementById("Query");
+        query_li = query_ul.getElementsByTagName('li');
+        weight_ul = document.getElementById("Weight");
+        weight_li = weight_ul.getElementsByTagName('li');
+    
+        // 删除上次的元素
+        for (i = query_li.length-1; i > 0; i--) {
+            query_ul.removeChild(query_li[i]);
+            weight_ul.removeChild(weight_li[i]);
+    
+            // weight_li[i].parentNode.removeChild(weight_li[i]);
+            // query_li[i].parentNode.removeChild(query_li[i]);
+        }
+    
+        const Url = "/kdtree_search";
+        // const Url = "/autocomplete";
+        var ans = $.get({
+            url:Url,
+            type:'GET',
+            dataType: "json",
+            data: {"x":x, "y":y},
+            success:function(response){
+                result = response.response.result;
+				if (result.hasOwnProperty('exception')) {
+					alert(result['exception']);
+					window.location.href = ".";
+				}
+                console.log(result);
+                // alert("result" + result);
+                // alert("ans:" + result.length);
+                q_li = document.createElement("li")
+                q_li.className = "header"
+                q_li.innerHTML = result.min_dist
+                query_ul.appendChild(q_li)
+
+                w_li = document.createElement("li")
+                w_li.className = "header"
+                w_li.innerHTML = result.point
+                weight_ul.appendChild(w_li)
+            },
+            error:function(error){
+                alert("请检查下是否上传kdtree.py文件");
+				window.location.href = ".";
+                alert("Error！");
+                console.log('Error！');
+            }
+        });
+    }
+
+    function myRange() {
+        // 声明变量
+        var input, filter, ul, li, a, i, result;
+        xmin = document.getElementById('xmin').value;
+        ymin = document.getElementById('ymin').value;
+        xmax = document.getElementById('xmax').value;
+        ymax = document.getElementById('ymax').value;
+        
+        // query = input.value.toLowerCase();
+        img = document.getElementById("ImgId");    
+        const Url = "/kdtree_range";
+        var ans = $.get({
+            url:Url,
+            type:'GET',
+            dataType: "json",
+            data: {"xmin":xmin, "ymin":ymin, "xmax":xmax, "ymax":ymax},
+            success:function(response){
+                result = response.response.result;
+				if (result.hasOwnProperty('exception')) {
+					alert(result['exception']);
+					window.location.href = ".";
+				}
+                console.log(result);
+                img.src = result.img_src;
+            },
+            error:function(error){
+                alert("请检查下是否上传kdtree.py文件");
+				window.location.href = ".";
+                alert("Error！");
+                console.log('Error！');
+            }
+        });
+    }
+</script>
+    

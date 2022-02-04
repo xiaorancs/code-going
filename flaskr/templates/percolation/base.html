@@ -1,0 +1,64 @@
+
+
+<style>
+.squares.ib {
+  display:inline-block;
+}
+.squares.tb{
+  display:table;
+}
+.squares.b {
+  display:block;
+}
+.squares {
+  margin:5px;
+  width:100px;
+  text-align:center;
+  text-shadow:0 0 1px white
+}
+div.squares:before {
+  content:'';
+  padding-top:25%;
+  display:inline-block;
+  vertical-align:middle;
+}
+table{
+    border-collapse: collapse;
+}
+td{    
+    padding:10px;
+    border:5px solid black;
+}
+</style>
+
+<!doctype html>
+<title>Percolation</title>
+
+<meta http-equiv="refresh" content="10;url={{ url_for('percolate') }}">
+
+{% if data %}
+<table border="1" height="20" width="20">
+    {% for i in range(n) %}
+    <tr>
+    {% for j in range(m) %}
+        {% if data[i][j] == 1 %}
+            <td class=".squares">{{ data[i][j] }}</td>
+        {% elif data[i][j] > 1 %}
+            <td bgcolor="#7FFFD4" class=".squares">{{ data[i][j] }}</td>
+        {% else %}
+            <td bgcolor="#700660" class=".squares">{{ data[i][j] }}</td>
+        {% endif %}
+    {% endfor %}
+    </tr>
+    {% endfor %}
+
+</table>
+{% else %}
+  <h1>对比起！你的程序返回是空的</h1>
+{% endif %}
+
+{% for n, t, mean, std, low_conf, high_conf in test_result %}
+<div>
+n:{{ n }};  t:{{ t }};  mean:{{ mean }};  std:{{ std }};  low_conf:{{ low_conf }};  high_conf:{{ high_conf }}
+</div>
+{% endfor %}

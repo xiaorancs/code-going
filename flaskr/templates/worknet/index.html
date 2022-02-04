@@ -1,0 +1,274 @@
+
+<script type="text/javascript" src="/static/js/jquery-3.6.0.min.js"></script>
+<style>
+#myInput {
+    background-image: url('https://static.runoob.com/images/mix/searchicon.png'); /* 搜索按钮 */
+    background-position: 10px 12px; /* 定位搜索按钮 */
+    background-repeat: no-repeat; /* 不重复图片*/
+    width: 100%; 
+    font-size: 16px; /* 加大字体 */
+    padding: 12px 20px 12px 40px; 
+    border: 1px solid #ddd; 
+    margin-bottom: 12px; 
+}
+
+#myUL {
+    /* 移除默认的列表样式 */
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#myUL li a {
+    border: 1px solid #ddd; /* 链接添加边框 */
+    margin-top: -1px; 
+    background-color: #f6f6f6; 
+    padding: 12px; 
+    text-decoration: none;
+    font-size: 18px; 
+    color: black; 
+    display: block; 
+}
+
+#myUL li a.header {
+    background-color: #e2e2e2; 
+    cursor: default; 
+}
+
+#myUL li a:hover:not(.header) {
+    background-color: #eee;
+}
+
+
+body{  
+background:url(/static/dw2.png);  
+/* filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')";  
+-moz-background-size:100% 100%;  
+    background-size:100% 100%;   */
+}
+
+#login-box{
+    width: 50%;
+    height: auto;
+    margin: 0 auto;
+    margin-top: 5%;
+    text-align: center;
+    background: #00000000;
+    padding: 20px 50px;
+    overflow: auto; 
+}
+
+.img_class {
+    height:150px;
+    width:150px
+}
+
+button{
+    margin-top: 15px;
+    width: 100px;
+    height: 30px;
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+    background:linear-gradient(to right,#f30909 0%,#4013e6e1 100%);
+    border: 0;
+    border-radius: 15px;
+}
+
+</style>
+
+<body>
+
+<div id="login-box">
+    <h1>worknet</h1>
+    
+<table id='id_table'>
+    <tr id="id_tr">  
+        <td>
+            <img id="ImgId" src="/static/worknet/horse.webp" class='img_class' alt="矩形搜索结果"> 
+        </td>
+        <td>
+            <img id="ImgId" src="/static/worknet/cat.webp" class='img_class'  alt="矩形搜索结果"> 
+        </td>
+        <td>
+            <img id="ImgId" src="/static/worknet/bear.webp" class='img_class'  alt="矩形搜索结果"> 
+        </td>
+        <td>
+            <img id="ImgId" src="/static/worknet/zebra.webp" class='img_class'  alt="矩形搜索结果"> 
+        </td>
+        <td>
+            <img id="ImgId" src="/static/worknet/table.webp" class='img_class'  alt="矩形搜索结果"> 
+        </td>
+    </tr>
+    <tr id="id_tr_text" align="center">
+        <td>horse</td>  
+        <td>cat</td>  
+        <td>bear</td>  
+        <td>zebra</td>  
+        <td>table</td>  
+    </tr>
+</table>
+
+<br>
+<button type="button" id="click" value="outcast" onclick="myOutCast()">outcast</button>
+
+<br>
+<br>
+<h2>Outcast Result</h2>
+<img id="ImgIdRes" src="/static/worknet/outcast_no.webp" height="200" width="200" alt="outcast">
+
+
+<br>
+<br>
+<br>
+<br>
+
+<table id='id_table'>
+    <tr id="id_tr1">  
+        <td>
+            <img id="ImgId" src="/static/worknet/apple.webp" class='img_class' alt="矩形搜索结果"> 
+        </td>
+        <td>
+            <img id="ImgId" src="/static/worknet/pear.webp" class='img_class' alt="矩形搜索结果"> 
+        </td>
+        <td>
+            <img id="ImgId" src="/static/worknet/peach.webp" class='img_class'  alt="矩形搜索结果"> 
+        </td>
+        <td>
+            <img id="ImgId" src="/static/worknet/banana.webp" class='img_class'  alt="矩形搜索结果"> 
+        </td>
+        <td>
+            <img id="ImgId" src="/static/worknet/lime.webp" class='img_class' alt="矩形搜索结果"> 
+        </td>
+    </tr>
+    <tr id="id_tr_text1" name="id_tr_text1" align="center">
+        <td>apple</td>  
+        <td>pear</td>  
+        <td>peach</td>  
+        <td>banana</td>  
+        <td>lime</td>  
+    </tr>
+    <tr id="id_tr1">  
+        <td>
+            <img id="ImgId" src="/static/worknet/blueberry.webp" class='img_class'  alt="矩形搜索结果"> 
+        </td>
+        <td>
+            <img id="ImgId" src="/static/worknet/strawberry.webp" class='img_class'  alt="矩形搜索结果"> 
+        </td>
+        <td>
+            <img id="ImgId" src="/static/worknet/potato.webp" class='img_class'  alt="矩形搜索结果"> 
+        </td>
+        <td>
+            <img id="ImgId" src="/static/worknet/watermelon.webp" class='img_class' alt="矩形搜索结果"> 
+        </td>
+        <td>
+            <img id="ImgId" src="/static/worknet/mango.webp" class='img_class' alt="矩形搜索结果"> 
+        </td>
+    </tr>
+    <tr id="id_tr_text1" name="id_tr_text1" align="center">
+        <td><button>blueberry</button></td>  
+        <td>strawberry</td>  
+        <td>potato</td>  
+        <td>watermelon</td>  
+        <td>mango</td>  
+    </tr>
+</table>
+
+<br>
+<!-- <input type="button" id="click" value="outcast" onclick="myOutCast1()"> -->
+<button type="button" id="click" value="outcast" onclick="myOutCast1()">outcast</button>
+
+<br>
+<br>
+<h2>Outcast Result</h2>
+<img id="ImgIdRes1" src="/static/worknet/outcast_no.webp" height="200" width="200" alt="outcast">
+
+</div>
+</body>
+
+<script>
+    function myOutCast() {
+        // 声明变量
+        var filter, ul, li, a, i, result;
+        tr = document.getElementById("id_tr_text");
+        tds = tr.getElementsByTagName('td');
+        // alert(tds.length);
+        var input = "";
+        for (i = 0; i < tds.length; i+=1) {
+            // alert(tds[i].innerHTML);
+            if (i == 0) {
+                input = input + tds[i].innerHTML;
+            } else {
+                input = input + "," + tds[i].innerHTML;
+            }
+        }
+        // alert(input);
+        img = document.getElementById("ImgIdRes");    
+        const Url = "/worknet_outcast";
+        var ans = $.get({
+            url:Url,
+            type:'GET',
+            dataType: "json",
+            data: {"input":input},
+            success:function(response){
+                result = response.response.result;
+				if (result.hasOwnProperty('exception')) {
+					alert(result['exception']);
+					window.location.href = ".";
+				}
+                console.log(result);
+                img.src = result.img_src;
+            },
+            error:function(error){
+                alert("请检查下是否上传worknet.py文件");
+				window.location.href = ".";
+                // alert("Error！");
+                console.log('Error！');
+            }
+        });
+    }
+
+    function myOutCast1() {
+        // 声明变量
+        var filter, ul, li, a, i, result, k;
+        trs = document.getElementsByName("id_tr_text1");
+        var input = "";
+        // alert(trs.length);
+        for (k = 0; k < trs.length; k++) {
+            tds = trs[k].getElementsByTagName('td');
+            for (i = 0; i < tds.length; i+=1) {
+                // alert(tds[i].innerHTML);
+                if (i == 0 && k == 0) {
+                    input = input + tds[i].innerHTML;
+                } else {
+                    input = input + "," + tds[i].innerHTML;
+                }
+            }
+        }
+        // alert(input);
+        img = document.getElementById("ImgIdRes1");    
+        const Url = "/worknet_outcast";
+        var ans = $.get({
+            url:Url,
+            type:'GET',
+            dataType: "json",
+            data: {"input":input},
+            success:function(response){
+                result = response.response.result;
+				if (result.hasOwnProperty('exception')) {
+					alert(result['exception']);
+					window.location.href = ".";
+				}
+                console.log(result);
+                img.src = result.img_src;
+            },
+            error:function(error){
+                alert("请检查下是否上传worknet.py文件");
+				window.location.href = ".";
+                // alert("Error！");
+                console.log('Error！');
+            }
+        });
+    }
+</script>
+    

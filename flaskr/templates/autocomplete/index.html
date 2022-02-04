@@ -1,0 +1,171 @@
+<script type="text/javascript" src="/static/js/jquery-3.6.0.min.js"></script>
+<style>
+#myInput {
+    background-image: url('https://static.runoob.com/images/mix/searchicon.png'); /* 搜索按钮 */
+    background-position: 10px 12px; /* 定位搜索按钮 */
+    background-repeat: no-repeat; /* 不重复图片*/
+    width: 100%; 
+    font-size: 16px; /* 加大字体 */
+    padding: 12px 20px 12px 40px; 
+    border: 1px solid #ddd; 
+    margin-bottom: 12px; 
+}
+
+#myUL {
+    /* 移除默认的列表样式 */
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#myUL li a {
+    border: 1px solid #ddd; /* 链接添加边框 */
+    margin-top: -1px; 
+    background-color: #f6f6f6; 
+    padding: 12px; 
+    text-decoration: none;
+    font-size: 18px; 
+    color: black; 
+    display: block; 
+}
+
+#myUL li a.header {
+    background-color: #e2e2e2; 
+    cursor: default; 
+}
+
+#myUL li a:hover:not(.header) {
+    background-color: #eee;
+}
+
+body{  
+background:url(/static/dw2.png);  
+/* filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')";  
+-moz-background-size:100% 100%;  
+    background-size:100% 100%;   */
+}
+
+#login-box{
+    width: 50%;
+    height: auto;
+    margin: 0 auto;
+    margin-top: 5%;
+    text-align: center;
+    background: #00000000;
+    padding: 20px 50px;
+    overflow: auto; 
+}
+
+.label_style0{
+    margin-top: 15px;
+    width: 100px;
+    height: 30px;
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+    background:linear-gradient(to right,#09a9f3 0%,#4013e6e1 100%);
+    border: 0;
+    border-radius: 15px;
+    vertical-align:middle;
+}
+
+.label_style1{
+    margin-top: 15px;
+    width: 100px;
+    height: 30px;
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+    background:linear-gradient(to right,#426134 0%,#544781e1 100%);
+    border: 0;
+    border-radius: 15px;
+    vertical-align:middle;
+}
+
+</style>
+
+<body>
+<div id="login-box">
+    <h1>WhaleSearch</h1>
+
+<input type="text" id="myInput" onkeyup="myFunction()" placeholder="搜索...">
+
+<table>
+    
+<tr>  
+    <td>
+        <ul id="Query">
+            <li><a href="#" class="header"></a><label class='label_style0'>Query</label></li>
+        </ul>
+        
+    </td>
+    <td>
+        <ul id="Weight">
+            <li><a href="#" class="header"></a><label class='label_style1'>Weight</label></li>
+        </ul>
+    </td>
+</tr>
+</table>
+</div>
+
+</body>
+
+<script>
+function myFunction() {
+    // 声明变量
+    var input, filter, ul, li, a, i, result;
+    input = document.getElementById('myInput');
+    query = input.value.toLowerCase();
+
+    query_ul = document.getElementById("Query");
+    query_li = query_ul.getElementsByTagName('li');
+    weight_ul = document.getElementById("Weight");
+    weight_li = weight_ul.getElementsByTagName('li');
+
+    // 删除上次的元素
+    for (i = query_li.length-1; i > 0; i--) {
+        query_ul.removeChild(query_li[i]);
+        weight_ul.removeChild(weight_li[i]);
+
+        // weight_li[i].parentNode.removeChild(weight_li[i]);
+        // query_li[i].parentNode.removeChild(query_li[i]);
+    }
+
+    const Url = "/autocomplete_do";
+    // const Url = "/autocomplete";
+    var ans = $.get({
+        url:Url,
+        type:'GET',
+        dataType: "json",
+        data: {"query":query},
+        success:function(response){
+            result = response.response.result
+            console.log(result);
+            // alert("result" + result);
+            if (result.hasOwnProperty('exception')) {
+                alert(result['exception']);
+                window.location.href = ".";
+            }
+            // alert("ans:" + result.length);
+
+            for (i = 0; i < Math.min(result.length, 15); i++) {
+                q_li = document.createElement("li")
+                q_li.className = "header"
+                q_li.innerHTML = "<label class='label_style0'>"+ result[i][0] +"</label>"
+                query_ul.appendChild(q_li)
+
+                w_li = document.createElement("li")
+                w_li.className = "header"
+                w_li.innerHTML = "<label class='label_style1'>"+ result[i][1] +"</label>"
+                weight_ul.appendChild(w_li)
+            }
+        },
+        error:function(error){
+            alert("请检查下是否上传autocomplete.py文件");
+            window.location.href = ".";
+            alert("Error！");
+            console.log('Error！');
+        }
+    });
+}
+</script>
